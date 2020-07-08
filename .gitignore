@@ -1,3 +1,7 @@
+# Visual Studio
+.vs/
+# JetBrains Rider
+.idea/
 /build/
 *.suo
 *.user
