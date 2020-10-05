@@ -16,6 +16,7 @@ using System.Web.Razor;
 using Microsoft.CodeAnalysis.Text;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
 using Microsoft.CodeAnalysis.Emit;
@@ -185,9 +186,11 @@ namespace RazorEngine.Roslyn.CSharp
         /// proper execution on Mono/Unix.
         /// </summary>
         /// <returns></returns>
-        private static bool IsMono()
+        private static bool ShouldCreatePortablePdb()
         {
-            return Type.GetType("Mono.Runtime") != null;
+            return Type.GetType("Mono.Runtime") != null
+                || RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
+                || RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
         }
 
         /// <summary>
@@ -235,7 +238,7 @@ namespace RazorEngine.Roslyn.CSharp
                     .WithPdbFilePath(assemblyPdbFile);
                 var pdbStreamHelper = pdbStream;
 
-                if (IsMono())
+                if (ShouldCreatePortablePdb())
                 {
                     opts = opts.WithDebugInformationFormat(DebugInformationFormat.PortablePdb);
                 }
