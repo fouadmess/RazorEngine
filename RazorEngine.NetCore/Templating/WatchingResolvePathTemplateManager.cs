@@ -77,14 +77,19 @@ namespace RazorEngine.Templating
 
         void watcher_Changed(object sender, FileSystemEventArgs e)
         {
-            cache.InvalidateCache(new FullPathTemplateKey(e.Name, e.FullPath, ResolveType.Global, null));
+            InvalidateTemplateCache(e.Name, e.FullPath);
             //queue.Enqueue(e);
         }
 
         void watcher_Renamed(object sender, RenamedEventArgs e)
         {
-            watcher_Changed(sender, new FileSystemEventArgs(WatcherChangeTypes.Deleted, e.OldFullPath, e.OldName));
-            watcher_Changed(sender, new FileSystemEventArgs(WatcherChangeTypes.Created, e.FullPath, e.Name));
+            InvalidateTemplateCache(e.OldName, e.OldFullPath);
+            InvalidateTemplateCache(e.Name, e.FullPath);
+        }
+
+        private void InvalidateTemplateCache(string name, string fullPath)
+        {
+            cache.InvalidateCache(new FullPathTemplateKey(name, fullPath, ResolveType.Global, null));
         }
 
         /// <summary>
