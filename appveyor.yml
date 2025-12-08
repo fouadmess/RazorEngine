@@ -20,6 +20,7 @@ artifacts:
 
 deploy:
   provider: NuGet
+  server: https://api.nuget.org/v3/index.json
   api_key:
     secure: %nuget_api_key%
   skip_symbols: false
