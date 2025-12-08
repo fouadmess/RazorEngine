@@ -21,7 +21,7 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/fouadmess/RazorEngine</RepositoryUrl>
     <PackageProjectUrl>https://github.com/fouadmess/RazorEngine</PackageProjectUrl>
-    <Version>3.1.0</Version>
+    <Version>3.1.1</Version>
     <Copyright>RazorEngine Copyright © RazorEngine Project 2011-2020</Copyright>
     <Company>RazorEngine</Company>
     <Product>RazorEngine</Product>
