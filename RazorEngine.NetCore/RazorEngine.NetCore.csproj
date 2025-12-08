@@ -39,7 +39,7 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.6.0" />
     <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="System.Security.Permissions" Version="4.7.0" />
+    <PackageReference Include="System.Security.Permissions" Version="6.0.0" />
   </ItemGroup>
 
   <!-- Exclude components that use System.Configuration -->
