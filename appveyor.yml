@@ -9,6 +9,5 @@ artifacts:
   name: RazorEngine
 deploy:
 - provider: NuGet
-  api_key:
-    secure: $(NUGET_API_KEY)
+  api_key: $(NUGET_API_KEY)
   artifact: /.*\.nupkg/
