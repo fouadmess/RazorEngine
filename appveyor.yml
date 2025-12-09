@@ -24,4 +24,4 @@ deploy:
     secure: $(NUGET_API_KEY)
   skip_symbols: false
   on:
-    branch: main              # Only push on main branch
+    branch: master             
