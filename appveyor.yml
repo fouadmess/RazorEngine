@@ -1,28 +1,27 @@
+version: '{build}'
 image: Visual Studio 2022
 
 configuration: Release
 
-environment:
-  NUGET_API_KEY:
-    secure: %nuget_api_key%
-
 before_build:
-- dotnet restore RazorEngine.NetCore.sln
+  - dotnet restore
 
-build_script:
-- dotnet build RazorEngine.NetCore/RazorEngine.NetCore.csproj -c Release
+build:
+  project: RazorEngine.NetCore.sln
 
 after_build:
-- dotnet pack RazorEngine.NetCore/RazorEngine.NetCore.csproj -c Release -o artifacts
+  - dotnet pack RazorEngine.NetCore/RazorEngine.NetCore.csproj -c Release
 
 artifacts:
-- path: artifacts\*.nupkg
-  name: nuget
+  - path: '**\*.nupkg'
+    name: packages
+  - path: '**\*.snupkg'
+    name: symbol-packages
 
 deploy:
-- provider: NuGet
-  api_key: $(NUGET_API_KEY)
+  provider: NuGet
+  api_key:
+    secure: %nuget_api_key%
   skip_symbols: false
-  artifact: nuget
   on:
-    branch: master   # choose release branch
+    branch: main              # Only push on main branch
